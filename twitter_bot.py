@@ -1,12 +1,16 @@
-import twitter_credentials
 import tweepy
-from random import randint
 import requests as req
 import re
 import time
+import os
 
-auth = tweepy.OAuthHandler(twitter_credentials.CONSUMER_KEY, twitter_credentials.CONSUMER_SECRET)
-auth.set_access_token(twitter_credentials.ACCESS_TOKEN, twitter_credentials.ACCESS_TOKEN_SECRET)
+CONSUMER_KEY = str(os.environ.get('CONSUMER_KEY', None))
+CONSUMER_SECRET = str(os.environ.get('CONSUMER_SECRET', None))
+ACCESS_TOKEN = str(os.environ.get('ACCESS_TOKEN', None))
+ACCESS_TOKEN_SECRET = str(os.environ.get('ACCESS_TOKEN_SECRET', None))
+
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 last_id_file_name = 'last_id.txt'
 mode = 'Not Delete'
